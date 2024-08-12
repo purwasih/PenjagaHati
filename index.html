@@ -19,6 +19,7 @@
             text-align: center;
             color: #fff;
             overflow: hidden;
+            position: relative;
         }
 
         .container {
@@ -57,37 +58,6 @@
             transition: opacity 1s ease-in-out, transform 1s ease-in-out;
         }
 
-        .emoji {
-            font-size: 2em;
-            margin: 10px 0;
-            animation: float 3s ease-in-out infinite;
-        }
-
-        .emoji.bird {
-            animation-delay: 0.5s;
-        }
-
-        .emoji.flower {
-            animation-delay: 1s;
-        }
-
-        .emoji.star {
-            animation-delay: 1.5s;
-        }
-
-        .emoji.love {
-            animation-delay: 2s;
-        }
-
-        @keyframes float {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-10px);
-            }
-        }
-
         button {
             margin-top: 20px;
             padding: 10px 20px;
@@ -105,7 +75,7 @@
             transform: scale(1.1);
         }
 
-        .background-elements {
+        .floating-elements {
             position: absolute;
             top: 0;
             left: 0;
@@ -115,34 +85,51 @@
             z-index: 1;
         }
 
-        .background-elements .star {
+        .floating-elements .element {
             position: absolute;
-            width: 5px;
-            height: 5px;
-            background: #fff;
-            border-radius: 50%;
-            box-shadow: 0 0 5px #fff, 0 0 15px #fff;
-            animation: twinkle 2s infinite ease-in-out;
+            font-size: 2.5em;
+            animation: floatAnimation 10s linear infinite;
         }
 
-        @keyframes twinkle {
-            0%, 100% {
-                opacity: 0.3;
+        .element.star {
+            animation-duration: 12s;
+        }
+
+        .element.bird {
+            animation-duration: 14s;
+        }
+
+        .element.flower {
+            animation-duration: 16s;
+        }
+
+        .element.love {
+            animation-duration: 18s;
+        }
+
+        @keyframes floatAnimation {
+            0% {
+                transform: translateY(100vh) translateX(0);
+                opacity: 0;
             }
             50% {
                 opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(10vw);
+                opacity: 0;
             }
         }
     </style>
 </head>
 
 <body>
-    <div class="background-elements">
-        <div class="star" style="top: 20%; left: 25%;"></div>
-        <div class="star" style="top: 40%; left: 60%;"></div>
-        <div class="star" style="top: 70%; left: 20%;"></div>
-        <div class="star" style="top: 85%; left: 50%;"></div>
-        <div class="star" style="top: 10%; left: 75%;"></div>
+    <div class="floating-elements">
+        <div class="element star" style="left: 10%;">✨</div>
+        <div class="element bird" style="left: 20%;">🕊️</div>
+        <div class="element flower" style="left: 40%;">🌸</div>
+        <div class="element love" style="left: 60%;">💖</div>
+        <div class="element star" style="left: 80%;">✨</div>
     </div>
 
     <div class="container">
@@ -161,10 +148,6 @@
             <p>Tak mau berlalu</p>
             <p>Kau dan aku</p>
         </div>
-        <div class="emoji bird">🕊️</div>
-        <div class="emoji flower">🌸</div>
-        <div class="emoji star">✨</div>
-        <div class="emoji love">💖</div>
     </div>
 
     <script>
