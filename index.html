@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Penjaga Hati - Bucin</title>
+    <title>Penjaga Hati - Lirik Lagu</title>
     <style>
         body,
         html {
@@ -12,185 +12,119 @@
             padding: 0;
             width: 100%;
             height: 100%;
-            font-family: 'Poppins', Arial, sans-serif;
-            background: linear-gradient(to right, #fbc2eb, #a6c0fe);
-            overflow: hidden;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to right, #ff7e5f, #feb47b);
             display: flex;
             align-items: center;
             justify-content: center;
+            text-align: center;
+            color: #fff;
         }
 
         .container {
-            position: relative;
-            width: 80%;
-            height: 80%;
-            overflow: hidden;
-        }
-
-        .slides {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            transition: transform 1s ease-in-out;
-        }
-
-        .slide {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-            text-align: center;
+            background: rgba(0, 0, 0, 0.6);
             padding: 20px;
-            box-sizing: border-box;
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 20px;
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            max-width: 800px;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+
+        .image-container {
+            margin-bottom: 20px;
+        }
+
+        .image-container img {
+            width: 100%;
+            max-width: 400px;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .lyrics p {
+            font-size: 1.2em;
+            margin: 10px 0;
             opacity: 0;
-            transform: scale(0.95);
             transition: opacity 1s ease-in-out, transform 1s ease-in-out;
         }
 
-        .slide.active {
-            opacity: 1;
-            transform: scale(1);
-        }
-
-        .slide.prev {
-            opacity: 0;
-            transform: scale(0.95);
-        }
-
-        .slide.next {
-            opacity: 0;
-            transform: scale(0.95);
-        }
-
-        .slide h1 {
-            font-size: 2.5em;
-            margin-bottom: 20px;
-            color: #333;
-        }
-
-        .slide p {
-            font-size: 1.4em;
-            margin: 10px 0;
-            max-width: 600px;
-            color: #444;
-        }
-
-        .slide .emoji {
-            font-size: 3.5em;
+        button {
             margin-top: 20px;
-        }
-
-        .navigation {
-            position: absolute;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 20px;
-        }
-
-        .navigation button {
-            background-color: #fff;
-            border: none;
-            padding: 12px 24px;
-            font-size: 18px;
-            color: #a6c0fe;
-            border-radius: 25px;
-            cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-        }
-
-        .navigation button:hover {
-            background-color: #4e54c8;
+            padding: 10px 20px;
+            font-size: 1.2em;
             color: #fff;
+            background: #ff7e5f;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.2s ease;
+        }
+
+        button:hover {
+            background: #feb47b;
             transform: scale(1.1);
         }
     </style>
 </head>
 
 <body>
-
     <div class="container">
-        <div class="slides">
-            <!-- Slide 1: Lagu Penjaga Hati -->
-            <div class="slide active">
-                <h1>Penjaga Hati - Bucin</h1>
-                <p>Selamat datang! Nikmati lagu "Penjaga Hati" dengan transisi yang menawan! 🎶</p>
-                <div class="emoji">🎵</div>
-                <p>Geser atau klik tombol di bawah untuk melanjutkan</p>
-            </div>
-
-            <!-- Slide 2: Lagu dan Lirik -->
-            <div class="slide">
-                <h1>Lagu: Penjaga Hati</h1>
-                <p>Di bawah ini adalah lirik lagu dan sedikit informasi tentangnya.</p>
-                <div class="emoji">🎤</div>
-                <p>Lirik:</p>
-                <p>"Kau adalah penjaga hati, yang membuatku merasa berarti..."</p>
-            </div>
-
-            <!-- Slide 3: Informasi -->
-            <div class="slide">
-                <h1>Informasi Lagu</h1>
-                <p>Lagu ini merupakan bagian dari album terbaru Bucin. Semoga kamu menyukainya! 💖</p>
-                <div class="emoji">💿</div>
-            </div>
-
-            <!-- Slide 4: Penutup -->
-            <div class="slide">
-                <h1>Terima Kasih!</h1>
-                <p>Terima kasih telah mendengarkan lagu ini. Semoga hari-harimu penuh dengan musik dan kebahagiaan! 🌟</p>
-                <div class="emoji">✨</div>
-            </div>
+        <h1>Penjaga Hati</h1>
+        <div class="image-container">
+            <img src="ibu-tida.jpeg" alt="Ibu Tida">
         </div>
-
-        <div class="navigation">
-            <button id="prevSlide">◀️ Sebelumnya</button>
-            <button id="nextSlide">Berikutnya ▶️</button>
+        <div class="lyrics">
+            <p id="line1">Saat malam tiba</p>
+            <p id="line2">Dan bintang-bintang bersinar</p>
+            <p id="line3">Hatiku selalu merasa</p>
+            <p id="line4">Ada yang menjaga</p>
+            <p id="line5">Di dalam gelapnya</p>
+            <p id="line6">Terpancar terang sinarnya</p>
+        </div>
+        <button id="playButton">Putar Musik</button>
+        <!-- YouTube Embed -->
+        <div id="videoContainer">
+            <iframe id="video" width="560" height="315" src="https://www.youtube.com/embed/jia3fhBQ8qI?autoplay=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
     </div>
 
     <script>
-        let currentSlide = 0;
-        const slides = document.querySelectorAll('.slide');
-        const totalSlides = slides.length;
+        document.addEventListener('DOMContentLoaded', () => {
+            const lines = document.querySelectorAll('.lyrics p');
+            const playButton = document.getElementById('playButton');
+            const video = document.getElementById('video');
+            let currentLine = 0;
 
-        function updateSlide(position) {
-            slides.forEach((slide, index) => {
-                slide.classList.remove('active', 'prev', 'next');
-                if (index === position) {
-                    slide.classList.add('active');
-                } else if (index === (position - 1 + totalSlides) % totalSlides) {
-                    slide.classList.add('prev');
-                } else if (index === (position + 1) % totalSlides) {
-                    slide.classList.add('next');
+            function showNextLine() {
+                if (currentLine < lines.length) {
+                    lines[currentLine].style.opacity = 1;
+                    lines[currentLine].style.transform = 'scale(1)';
+                    currentLine++;
                 }
+            }
+
+            function hideAllLines() {
+                lines.forEach(line => {
+                    line.style.opacity = 0;
+                    line.style.transform = 'scale(0.95)';
+                });
+            }
+
+            playButton.addEventListener('click', () => {
+                const player = video.contentWindow;
+                player.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+                hideAllLines();
+                currentLine = 0;
+                showNextLine();
+                setInterval(showNextLine, 3000); // Adjust timing if needed
             });
-        }
-
-        document.getElementById('nextSlide').addEventListener('click', () => {
-            currentSlide = (currentSlide + 1) % totalSlides;
-            updateSlide(currentSlide);
         });
-
-        document.getElementById('prevSlide').addEventListener('click', () => {
-            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
-            updateSlide(currentSlide);
-        });
-
-        // Initialize the first slide
-        updateSlide(currentSlide);
     </script>
-
 </body>
 
 </html>
