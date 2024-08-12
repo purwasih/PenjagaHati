@@ -6,35 +6,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Penjaga Hati - Lirik Lagu</title>
     <style>
-        body,
-        html {
+        body, html {
             margin: 0;
             padding: 0;
             width: 100%;
             height: 100%;
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(to right, #1f4037, #99f2c8); /* Background gradient */
+            font-family: 'Poppins', Arial, sans-serif;
+            background: linear-gradient(to right, #141e30, #243b55);
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
             color: #fff;
-            position: relative;
             overflow: hidden;
+            position: relative;
         }
 
         .container {
-            background: rgba(0, 0, 0, 0.6);
+            background: rgba(0, 0, 0, 0.7);
             padding: 20px;
-            border-radius: 15px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            border-radius: 20px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
             max-width: 700px;
-            z-index: 1;
+            position: relative;
+            z-index: 2;
         }
 
         h1 {
             font-size: 2.5em;
             margin-bottom: 20px;
+            color: #ff6b6b;
         }
 
         .image-container {
@@ -42,19 +43,19 @@
         }
 
         .image-container img {
-            width: 100%;
+            width: 80%;
             max-width: 300px;
             height: auto;
             border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
         }
 
         .lyrics p {
-            font-size: 1.2em;
-            margin: 10px 0;
+            font-size: 1.4em;
+            margin: 15px 0;
             opacity: 0;
-            transform: translateY(10px);
-            transition: opacity 2s ease-in-out, transform 2s ease-in-out;
+            transform: scale(0.95);
+            transition: opacity 1s ease-in-out, transform 1s ease-in-out;
         }
 
         button {
@@ -62,7 +63,7 @@
             padding: 10px 20px;
             font-size: 1.2em;
             color: #fff;
-            background: #ff7e5f;
+            background: #ff6b6b;
             border: none;
             border-radius: 10px;
             cursor: pointer;
@@ -70,95 +71,66 @@
         }
 
         button:hover {
-            background: #feb47b;
+            background: #ff8585;
             transform: scale(1.1);
         }
 
-        .emoji {
+        .floating-elements {
             position: absolute;
-            font-size: 2em;
-            opacity: 0.8;
-            animation: move 8s linear infinite;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
         }
 
-        .emoji.bintang {
-            top: 10%;
-            left: 50%;
-            animation-duration: 8s;
-            animation-delay: 0s;
+        .floating-elements .element {
+            position: absolute;
+            font-size: 2.5em;
+            animation: floatAnimation 10s linear infinite;
         }
 
-        .emoji.burung {
-            top: 20%;
-            right: 20%;
-            animation-duration: 10s;
-            animation-delay: 1s;
-        }
-
-        .emoji.love {
-            bottom: 15%;
-            left: 15%;
+        .element.star {
             animation-duration: 12s;
-            animation-delay: 2s;
         }
 
-        .emoji.bunga {
-            bottom: 10%;
-            right: 10%;
+        .element.bird {
             animation-duration: 14s;
-            animation-delay: 3s;
         }
 
-        @keyframes move {
+        .element.flower {
+            animation-duration: 16s;
+        }
+
+        .element.love {
+            animation-duration: 18s;
+        }
+
+        .element.dot {
+            font-size: 1.5em;
+            animation: blinkAnimation 1s infinite;
+        }
+
+        @keyframes floatAnimation {
             0% {
-                transform: translateY(0) rotate(0);
-                opacity: 1;
-            }
-
-            50% {
-                transform: translateY(-20px) rotate(360deg);
-                opacity: 0.7;
-            }
-
-            100% {
-                transform: translateY(0) rotate(720deg);
-                opacity: 1;
-            }
-        }
-
-        .blink-dots {
-            position: absolute;
-            width: 5px;
-            height: 5px;
-            background-color: #fff;
-            border-radius: 50%;
-            animation: blink 1.5s infinite alternate;
-            opacity: 0.7;
-        }
-
-        .blink-dots.dot1 {
-            top: 30%;
-            left: 25%;
-        }
-
-        .blink-dots.dot2 {
-            top: 40%;
-            left: 70%;
-            animation-duration: 1.8s;
-        }
-
-        .blink-dots.dot3 {
-            top: 60%;
-            left: 40%;
-            animation-duration: 2s;
-        }
-
-        @keyframes blink {
-            from {
+                transform: translateY(100vh) translateX(0);
                 opacity: 0;
             }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(10vw);
+                opacity: 0;
+            }
+        }
 
-            to {
+        @keyframes blinkAnimation {
+            0%, 100% {
+                opacity: 0;
+            }
+            50% {
                 opacity: 1;
             }
         }
@@ -166,68 +138,51 @@
 </head>
 
 <body>
+    <div class="floating-elements">
+        <div class="element star" style="left: 10%;">✨</div>
+        <div class="element bird" style="left: 20%;">🕊️</div>
+        <div class="element flower" style="left: 30%;">🌸</div>
+        <div class="element love" style="left: 40%;">💖</div>
+        <div class="element star" style="left: 50%;">✨</div>
+        <div class="element dot" style="left: 70%; top: 20%;">•</div>
+        <div class="element dot" style="left: 80%; top: 40%;">•</div>
+        <div class="element dot" style="left: 60%; top: 60%;">•</div>
+        <div class="element dot" style="left: 30%; top: 80%;">•</div>
+    </div>
+
     <div class="container">
         <h1>Penjaga Hati</h1>
         <div class="image-container">
             <img src="ibu-tida.jpeg" alt="Ibu Tida">
         </div>
         <div class="lyrics">
-            <p id="line1">Kan ku arungi tujuh laut samudra</p>
-            <p id="line2">Kan ku daki pegunungan Himalaya</p>
-            <p id="line3">Apapun kan ku lakukan tuk dirimu sayang</p>
-            <p id="line4">Oh penjaga hati</p>
-            <p id="line5">Kau dan aku sempurna</p>
-            <p id="line6">Semoga ada cara tuk terus bersama</p>
-            <p id="line7">Selalu ku tunggu</p>
-            <p id="line8">Tak mau berlalu</p>
-            <p id="line9">Kau dan aku</p>
+            <p>Kan ku arungi tujuh laut samudra</p>
+            <p>Kan ku daki pegunungan Himalaya</p>
+            <p>Apapun kan ku lakukan tuk dirimu sayang</p>
+            <p>Oh penjaga hati</p>
+            <p>Kau dan aku sempurna</p>
+            <p>Semoga ada cara tuk terus bersama</p>
+            <p>Selalu ku tunggu</p>
+            <p>Tak mau berlalu</p>
+            <p>Kau dan aku</p>
         </div>
-        <button id="playButton">Putar Musik</button>
-        <audio id="audio" src="penjaga-hati.mp3"></audio>
     </div>
-
-    <div class="emoji bintang">⭐</div>
-    <div class="emoji burung">🐦</div>
-    <div class="emoji love">💖</div>
-    <div class="emoji bunga">🌸</div>
-
-    <div class="blink-dots dot1"></div>
-    <div class="blink-dots dot2"></div>
-    <div class="blink-dots dot3"></div>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const lines = document.querySelectorAll('.lyrics p');
-            const audio = document.getElementById('audio');
-            const playButton = document.getElementById('playButton');
             let currentLine = 0;
 
             function showNextLine() {
                 if (currentLine < lines.length) {
                     lines[currentLine].style.opacity = 1;
-                    lines[currentLine].style.transform = 'translateY(0)';
+                    lines[currentLine].style.transform = 'scale(1)';
                     currentLine++;
+                    setTimeout(showNextLine, 3000); // Adjust timing if needed
                 }
             }
 
-            function hideAllLines() {
-                lines.forEach(line => {
-                    line.style.opacity = 0;
-                    line.style.transform = 'translateY(10px)';
-                });
-            }
-
-            playButton.addEventListener('click', () => {
-                if (audio.paused) {
-                    audio.play();
-                    hideAllLines();
-                    currentLine = 0;
-                    showNextLine();
-                    setInterval(showNextLine, 4000); // Adjust timing if needed
-                } else {
-                    audio.pause();
-                }
-            });
+            showNextLine();
         });
     </script>
 </body>
