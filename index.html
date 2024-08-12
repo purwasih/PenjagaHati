@@ -98,19 +98,11 @@
         .element.bird {
             animation-duration: 14s;
         }
-        
-        .elemen.love{
-            animation-duration: 15s;
-        }
-        
+
         .element.flower {
             animation-duration: 16s;
         }
-        
-        .element.flower {
-            animation-duration: 18s;
-        }
-        
+
         .element.love {
             animation-duration: 18s;
         }
@@ -203,12 +195,15 @@
         </div>
     </div>
 
+    <audio id="audio" src="penjaga-hati.mp3"></audio>
+
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const lines = document.querySelectorAll('.lyrics p');
             const instructions = document.querySelector('.instructions');
             const thankYou = document.querySelector('.thank-you');
             const playButton = document.getElementById('playButton');
+            const audio = document.getElementById('audio');
             let currentLine = 0;
 
             function showNextLine() {
@@ -226,6 +221,7 @@
 
             playButton.addEventListener('click', () => {
                 instructions.style.display = 'none'; // Hide instructions when button is clicked
+                audio.play();
                 showNextLine();
             });
         });
