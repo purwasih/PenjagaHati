@@ -6,36 +6,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Penjaga Hati - Lirik Lagu</title>
     <style>
-        body,
-        html {
+        body, html {
             margin: 0;
             padding: 0;
             width: 100%;
             height: 100%;
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(to right, #1d2b64, #f8cdda);
+            font-family: 'Poppins', Arial, sans-serif;
+            background: linear-gradient(to right, #141e30, #243b55);
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
             color: #fff;
             overflow: hidden;
-            position: relative;
         }
 
         .container {
-            background: rgba(0, 0, 0, 0.6);
+            background: rgba(0, 0, 0, 0.7);
             padding: 20px;
-            border-radius: 15px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            border-radius: 20px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
             max-width: 800px;
-            z-index: 1;
             position: relative;
+            z-index: 2;
         }
 
         h1 {
             font-size: 2.5em;
             margin-bottom: 20px;
+            color: #ff6b6b;
         }
 
         .image-container {
@@ -47,14 +46,46 @@
             max-width: 400px;
             height: auto;
             border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
         }
 
         .lyrics p {
-            font-size: 1.5em;
-            margin: 10px 0;
+            font-size: 1.4em;
+            margin: 15px 0;
             opacity: 0;
+            transform: scale(0.95);
             transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+        }
+
+        .emoji {
+            font-size: 2em;
+            margin: 10px 0;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .emoji.bird {
+            animation-delay: 0.5s;
+        }
+
+        .emoji.flower {
+            animation-delay: 1s;
+        }
+
+        .emoji.star {
+            animation-delay: 1.5s;
+        }
+
+        .emoji.love {
+            animation-delay: 2s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
         }
 
         button {
@@ -62,7 +93,7 @@
             padding: 10px 20px;
             font-size: 1.2em;
             color: #fff;
-            background: #ff7e5f;
+            background: #ff6b6b;
             border: none;
             border-radius: 10px;
             cursor: pointer;
@@ -70,110 +101,88 @@
         }
 
         button:hover {
-            background: #feb47b;
+            background: #ff8585;
             transform: scale(1.1);
         }
 
-        .stars,
-        .birds,
-        .flowers,
-        .hearts {
+        .background-elements {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            pointer-events: none;
-            z-index: 0;
+            overflow: hidden;
+            z-index: 1;
         }
 
-        .stars span,
-        .birds span,
-        .flowers span,
-        .hearts span {
+        .background-elements .star {
             position: absolute;
-            display: block;
-            width: 20px;
-            height: 20px;
-            animation: float 20s infinite;
-            opacity: 0.8;
+            width: 5px;
+            height: 5px;
+            background: #fff;
+            border-radius: 50%;
+            box-shadow: 0 0 5px #fff, 0 0 15px #fff;
+            animation: twinkle 2s infinite ease-in-out;
         }
 
-        .stars span {
-            background: url('data:image/svg+xml;base64,PHN2ZyBmaWxsPSIjRkZGIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMiAxMiI+PHBhdGggZD0iTTEyIDMuOTggOC4xMiAzLjVMNiAyIDQuMTEgMy41NiAwIDQuMTlMMy4yMSA3LjI2bC0uNyAzLjc2TDYgOS41OWwxLjkzIDIuNTJsLS43LTMuNzYgMy4yMS0zLjA3LTQtMS41N3pNNiAwbDIgMi4xN2wzLjk5LjQ3LTIuOTkgMi41Nkw3LjI4IDdMNiA5LjU5IDQuNzIgNyAyIDUuMTlMNS4wMSA0LjlsLjgtMy40NCAyLS45Nkw2IDB6Ii8+PC9zdmc+') no-repeat center center;
-            background-size: cover;
-        }
-
-        .birds span {
-            background: url('data:image/svg+xml;base64,PHN2ZyBmaWxsPSIjRkZGIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMiAxMiI+PHBhdGggZD0iTTEyIDQuMTdDMTEuMjEgMy41NSAxMC4yNyAzIDEwIDIuMzdDOS4zMyAxLjA3IDguNTYgMCA3LjI1IDBDNS44OCAwIDMuNjUgMy43NSA0LjExIDQuNzUgNC40OCA0LjUgNS45MyAzLjA4IDYgMy4xMSA2LjMyIDMuMTUgNi41IDQuMjMgNi4xMSA0LjQ2IDUuNzkgNC43NCA2LjI2IDYuMTUgNi4yMyA2LjI0IDcuMDkgNi41OSA3LjI1IDYuNSAxLjA3IDQuNjMgMCAzLjcyIDAgMy4wNiAwIDIuMjEgMS41MiAyLjIxIDIuMTRDMy41MiAyLjY4IDQuNTIgMi4yNSA1LjA2IDIuMzkgNS44NiAyLjU3IDYuNzMgMi43NSA2LjgyIDMuMTcgNi43OCAzLjU3IDcuODMgMy42NSA3Ljc4IDMuODMgNy4zMiA0LjEyIDcuMjggNC4xNnptMCAuNzVjLS4yNiAwLS40My4xLS41NC4xNi0uMDMuMDEtLjA1LjAyLS4wOC4wMkw2IDQuNzNsLjYyLjY0LjA2LS4wMnMtLjA1LS4wMy0uMDctLjA1QzYuNTUuODguNCA3LjUuNDggOC4xNy43NiA3LjgxIDAgNi4yN3M2LjczLTIuNTIgNy42Ny0xLjdjMS41OCAwIDIuMTggMS4wMiAyLjIxIDEuMDdsLS4wMi4wOC0uMDEuMDMuMDEuMDJjMC0uMDEuMDIuMDEuMDMuMDFMNy44IDIuMTZMMTYuMjguNzljLTEuMzEtMS40Ny0zLjk3LTItNS4yNS0uMzgtMS42NC0uMzQtMy4xMyAxLjM3LTQuMjkgMS4wN3pNMS43OSAzLjI3Yy0uNzUgMC0xLjQgMS4zMi0xLjE0IDIuMTQgMCAuNTguNjYuOTkgMS4wNiAxLjE4LjU0LS4wNSAxLjQ0LS40MiAyLjMyLS42Ny0uMDIuNDQtLjEzLjg5LS4zOC43NGMtLjM1LjE0LS43MS4yMy0xLjA3LjI4cy0uNzgtLjA4LTEuMTUtLjI5Yy4wOC4yMy4xOC41LjM0LjYuNDQuMTYuOTYuMzIgMS40Ni40NS0uMDMtLjMzLS4wNi0uNjUtLjExLS45Ny0uMTYtMS4wOS0uODgtMS43NC0xLjY5LTEuNjUtMS4yNyAwLS41My0uMTEtMS4wMy0uMTEtMS40MyAwLS4yLjAyLS40LjA2LS41OSAwLS40NC0uMjktMS4wNy0uODUtMS4zNy4wNi4zLjAyLjYuMTYuODQuMjYuMzYuMTcuNzkuMjkgMS4xNy4zNS4xNi4wMy4zMi4wNC40OC4wMy4zMiAwLS4zOS0uMDYtLjggMCAuNzQtLjgzIDEuNDEtMS44MSAxLjA4LS4zOS4xMi0uODQuMjItMS4zOC4zNC0uMTIuMDYtLjI2LjExLS4zOS4xNGwtLjA5LS4wNC0uMDQtLjE3cy4wMS0uMDYuMDEtLjA5Yy4yNi0uMzcuMzItLjg4LjMtMS4zNGwxLjAxLjE0LTIuMTEtMi4xOS0uNjctLjA1Yy0uNTMuMjQtLjE4Ljc1LjM4IDEuMDJjLjI1LjA5LjM5LjI4LjU1LjU3Yy4yNi4wOS40NS4wMy42My0uMjMuMTktLjI2LjM3LS4zOS41My0uNjAuMDEuMy4xNC42LjQ2Ljg5cy44Ny0uMzguNzEtLjYyLS42NC0uNjctLjU3LTEuMDRjLjA3LS4yMS4wNS0uNDQuMDQtLjY2LjA5LS4xLjI5LS4zNS41Ni0uMzMuMTYtLjA1LjMxLS4wMy40Ny4wMS4wNi4yMi4wOS40Ni4xNS42LjIzLjE3LjM4LjM2LjM5LjQ3LjMyLjY1cy0uMzMuNTMtMS4wOS4zMy4xMS4yNC4yOS4zNC41NC4zNS41NCAxLjAwcy0uMyAxLjE2LS4xNSAxLjYzYy0uMTEuMDEtLjI2LjA1LS4zOS4wNS0uNTMgMCAxLjEtLjAzIDEuNTMuMzdjLS4zMS0uMzctLjUyLS4xMy0uNTMtLjE0LjQ4LS4xNC45NC0uMzcuMS0uODJsLS4wNC0uMTQuMDQtLjEzLjIxLS4yNS0uMjQtLjA4LS4xOC0uMjYtLjI1LS4yMS0uMDYuMDEtLjE2LS4wNS0uMjUtLjA5LS4wNS0uMTEtLjE0LS4xMy0uMjItLjE1LS4xNi0uMDQtLjI0LS4xMy0uMjktLjI3LS4wNS0uMTYtLjA0LS4zMy0uMTItLjQtLjA4LS4xNy0uMjktLjI0LS4zNy0uMTQtLjA1LS4yOC0uMTMtLjQyLS4yLTMuNjItMi4yMi0yLjczLTMuNDktMy40MS0yLjUyLTEuMjctLjI1LTMuMzcuNTMtMS4yNiAzLjMzIDEuMzYgMS41NCAzLjIxLjI2IDMuNDItMS4yNS0uMjQtMi42NC0yLjQtNC0zLjQ3bC4wMi4wM3YuMDJjMS4xNiAwLjMgMi4yOSAwLjM5IDMuMjIgMS40NyAxLjExIDIuMDIgMS43MiA0LjQxIDEuNDggNi44OC0uNzQgMy40OC0yLjkzIDYtNi4zNCA1Ljc3LS4wMy0uMDQtLjA3LS4wOS0uMS0uMTMuMjQtLjE3LjQ5LS4zNC43My0uNTMtMS4zMi4zMy0yLjQzLS42MS0yLjUzLTEuNzEuNTctMS40IDEuMTQtMi42MyAxLjc3LTMuOC44OC0uNjYgMS41NC0uMzYgMi40Ny4xNCAuNjYuMTggMi4yNCAyLjUzIDIuMTcgMy43LjE0IDIuNjItMy4wMSA0LjM3LTMuNTEgNi4yMy0uMjkuNzUtLjM1IDEuNTYtLjI0IDIuMzggMC4wMi4xMy0uMDguMjUtLjA5LjM4LS4wMi4yMy0uMTMuNDktLjEuNzYuMDcuMzQuMTEuNzEuMTkuNzktLjAyLS42My0uMzQtMS4yNC0uNzktMS42Ny0uMjQtLjItLjQ3LS40LS42Ny0uNjNsLS4wNi0uMTcuMS4wNGwuMDcuMDRjLjE1LS4xMi4zLS4yNC40My0uMzcuMzItLjQxLjM5LTEuMDcuMjQtMS42Mkw2LjkxLjg2Yy0xLjMyLjMxLTIuNTQuODItMy41OSAxLjUxLS45Ni0uMjUtMS4wNS4yOC0uNTguMzcuMTAuMTEuMjMuMjYuMzAuMzhzLjA1LjI4LjExLjQxYy4wNS4yMy4wNy41LjAyLjczcy0uMTIuNS0uMzcuNjItLjQ3LjEtLjU1LjExYy0uNTQuMTItMS4wNC4zNS0xLjM3LjcuMzYuMjEuNjkuMzUuOTUuNDkuMjIuMTQuMzkuMjMuNTcuMjR2LjA4Yy4xNS4yNC4zMy41OC41NC45Ni0uMy4zMi0uNzEuNTgtMS4yOC42LS40Ni0uMDItLjk3LjEyLTEuNDAuNDYtLjgzLjI1LS43Ni0uMTQtMS4wNC4zOS0xLjI3LjgyLTEuMDguOTctMS44MyAxLjYzLTIuMTUgMi42OCAxLjA3LjE4IDIuMDkuMzcgMy4wMy41NyAxLjI2LjA3IDIuNCAuMzEgMy4zMyAxLjE3LjI4LjI2LjUzLjYgMS4yNy44Mi0uMjkuMDItLjUzLjA1LS43OS4xLS40OS4xNi0uODQuMy0xLjEyLjUyLS4xNi0uMTItLjI1LS4zNC0uMzQtLjV6Ii8+PC9zdmc+') no-repeat center center;
-            background-size: cover;
-        }
-
-        .flowers span {
-            background: url('data:image/svg+xml;base64,PHN2ZyBmaWxsPSIjRkZGIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMiAxMiI+PHBhdGggZD0iTTEyIDYuMjJDOS41OSAzLjU4IDUuMjggMy41OSA0IDQgMyA1LjEyIDEuNTUgNiAxLjUgNyAxLjQgOCAyLjM5IDkuMDAgMiA5LjAxQzMuMjggMTEuNDcgMy41MyAxMCAzLjU0IDlIMzljLjAwNi0uMzA1LjA5Ni0xLjMxMy0xLjM0LTIuODdBNC41NSA0LjU1IDAgMCAxIDguMDEgNiAxMiA0LjggMTEuOTMgNCAxMSA0Yy4yLS41OSAxLjc3LS45MSAxLjA1LTIuNTdDMTIuODQgMy44OCAxMS4xIDMuNDcgMTAgNC4wMiA3Ljk1IDMuMzQgNi4xMSAzLjUgNi4xMSAzLjUuODkuMTEtMS41NSAzLjI5LTcuMDEgMi41NnoiLz48L3N2Zz4=') no-repeat center center;
-            background-size: cover;
-        }
-
-        .hearts span {
-            background: url('data:image/svg+xml;base64,PHN2ZyBmaWxsPSIjRkZGIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMiAxMiI+PHBhdGggZD0iTTMgMkgzLjVDMy4yNSAyLjUgMy40IDIuMjUgMy41IDIuMTVBMS45MiAxLjkyIDAgMCAxIDQuNSAxLjUgNiA2IDAgMCAwIDYuNSAzLjQ1TDcgNEw3LjUgMy40NUM3Ljg5IDMuMTMgOCAyLjUgOCAyLjVjMSAxLjUgMS43NSAyLjUgMiA0LjVhNiA2IDAgMCAxLTIgNEg2VjguNzRBMi43IDIuNyAwIDAgMCA0IDZ2LTIuNmgxTDIgNkgxYTYgNiAwIDAgMSAyLTR6Ii8+PC9zdmc+') no-repeat center center;
-            background-size: cover;
-        }
-
-        @keyframes float {
-            0% {
-                transform: translateY(0);
-                opacity: 1;
+        @keyframes twinkle {
+            0%, 100% {
+                opacity: 0.3;
             }
-
-            100% {
-                transform: translateY(-100vh);
-                opacity: 0;
+            50% {
+                opacity: 1;
             }
         }
     </style>
 </head>
 
 <body>
-    <div class="stars">
-        <span style="top: 90%; left: 10%; animation-delay: 2s;"></span>
-        <span style="top: 95%; left: 20%; animation-delay: 3s;"></span>
-        <span style="top: 85%; left: 70%; animation-delay: 4s;"></span>
-        <span style="top: 80%; left: 80%; animation-delay: 5s;"></span>
+    <div class="background-elements">
+        <div class="star" style="top: 20%; left: 25%;"></div>
+        <div class="star" style="top: 40%; left: 60%;"></div>
+        <div class="star" style="top: 70%; left: 20%;"></div>
+        <div class="star" style="top: 85%; left: 50%;"></div>
+        <div class="star" style="top: 10%; left: 75%;"></div>
     </div>
-    <div class="birds">
-        <span style="top: 90%; left: 30%; animation-delay: 4s;"></span>
-        <span style="top: 75%; left: 40%; animation-delay: 6s;"></span>
-        <span style="top: 90%; left: 50%; animation-delay: 8s;"></span>
-    </div>
-    <div class="flowers">
-        <span style="top: 80%; left: 60%; animation-delay: 2s;"></span>
-        <span style="top: 85%; left: 70%; animation-delay: 5s;"></span>
-    </div>
-    <div class="hearts">
-        <span style="top: 75%; left: 80%; animation-delay: 6s;"></span>
-        <span style="top: 90%; left: 90%; animation-delay: 8s;"></span>
-    </div>
+
     <div class="container">
-        <h1>Lirik Lagu - Penjaga Hati</h1>
-        <div class="lyrics">
-            <p>Kau penjaga hatiku ✨</p>
-            <p>Di saat diri ini mulai layu 🌸</p>
-            <p>Dan ku serahkan cintaku 💖</p>
-            <p>Kepadamu seutuhnya 🕊️</p>
+        <h1>Penjaga Hati</h1>
+        <div class="image-container">
+            <img src="ibu-tida.jpeg" alt="Ibu Tida">
         </div>
-        <button onclick="showLyrics()">Tampilkan Lirik</button>
+        <div class="lyrics">
+            <p>Kan ku arungi tujuh laut samudra</p>
+            <p>Kan ku daki pegunungan Himalaya</p>
+            <p>Apapun kan ku lakukan tuk dirimu sayang</p>
+            <p>Oh penjaga hati</p>
+            <p>Kau dan aku sempurna</p>
+            <p>Semoga ada cara tuk terus bersama</p>
+            <p>Selalu ku tunggu</p>
+            <p>Tak mau berlalu</p>
+            <p>Kau dan aku</p>
+        </div>
+        <div class="emoji bird">🕊️</div>
+        <div class="emoji flower">🌸</div>
+        <div class="emoji star">✨</div>
+        <div class="emoji love">💖</div>
     </div>
 
     <script>
-        function showLyrics() {
-            const lyrics = document.querySelectorAll('.lyrics p');
-            lyrics.forEach((line, index) => {
-                setTimeout(() => {
-                    line.style.opacity = '1';
-                    line.style.transform = 'translateY(0)';
-                }, index * 1000);
-            });
-        }
+        document.addEventListener('DOMContentLoaded', () => {
+            const lines = document.querySelectorAll('.lyrics p');
+            let currentLine = 0;
+
+            function showNextLine() {
+                if (currentLine < lines.length) {
+                    lines[currentLine].style.opacity = 1;
+                    lines[currentLine].style.transform = 'scale(1)';
+                    currentLine++;
+                    setTimeout(showNextLine, 2000);
+                }
+            }
+
+            showNextLine();
+        });
     </script>
 </body>
 
