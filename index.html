@@ -13,7 +13,7 @@
             width: 100%;
             height: 100%;
             font-family: 'Arial', sans-serif;
-            background: linear-gradient(to right, #ff7e5f, #feb47b);
+            background: linear-gradient(to right, #1f4037, #99f2c8); /* Background gradient */
             display: flex;
             align-items: center;
             justify-content: center;
@@ -29,6 +29,7 @@
             border-radius: 15px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
             max-width: 700px;
+            z-index: 1;
         }
 
         h1 {
@@ -52,6 +53,7 @@
             font-size: 1.2em;
             margin: 10px 0;
             opacity: 0;
+            transform: translateY(10px);
             transition: opacity 2s ease-in-out, transform 2s ease-in-out;
         }
 
@@ -75,31 +77,36 @@
         .emoji {
             position: absolute;
             font-size: 2em;
-            animation: move 5s linear infinite;
+            opacity: 0.8;
+            animation: move 8s linear infinite;
         }
 
         .emoji.bintang {
-            top: 5%;
+            top: 10%;
             left: 50%;
-            animation-duration: 6s;
+            animation-duration: 8s;
+            animation-delay: 0s;
         }
 
         .emoji.burung {
-            top: 10%;
+            top: 20%;
             right: 20%;
-            animation-duration: 7s;
+            animation-duration: 10s;
+            animation-delay: 1s;
         }
 
         .emoji.love {
-            bottom: 10%;
+            bottom: 15%;
             left: 15%;
-            animation-duration: 8s;
+            animation-duration: 12s;
+            animation-delay: 2s;
         }
 
         .emoji.bunga {
-            bottom: 15%;
+            bottom: 10%;
             right: 10%;
-            animation-duration: 9s;
+            animation-duration: 14s;
+            animation-delay: 3s;
         }
 
         @keyframes move {
@@ -125,24 +132,25 @@
             height: 5px;
             background-color: #fff;
             border-radius: 50%;
-            animation: blink 1s infinite alternate;
+            animation: blink 1.5s infinite alternate;
+            opacity: 0.7;
         }
 
         .blink-dots.dot1 {
-            top: 20%;
+            top: 30%;
             left: 25%;
         }
 
         .blink-dots.dot2 {
-            top: 30%;
-            left: 75%;
-            animation-duration: 1.2s;
+            top: 40%;
+            left: 70%;
+            animation-duration: 1.8s;
         }
 
         .blink-dots.dot3 {
-            top: 70%;
+            top: 60%;
             left: 40%;
-            animation-duration: 1.5s;
+            animation-duration: 2s;
         }
 
         @keyframes blink {
@@ -197,7 +205,7 @@
             function showNextLine() {
                 if (currentLine < lines.length) {
                     lines[currentLine].style.opacity = 1;
-                    lines[currentLine].style.transform = 'scale(1)';
+                    lines[currentLine].style.transform = 'translateY(0)';
                     currentLine++;
                 }
             }
@@ -205,7 +213,7 @@
             function hideAllLines() {
                 lines.forEach(line => {
                     line.style.opacity = 0;
-                    line.style.transform = 'scale(0.95)';
+                    line.style.transform = 'translateY(10px)';
                 });
             }
 
