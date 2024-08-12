@@ -1,35 +1,231 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Penjaga Hati - Lirik Lagu</title>
-    <link rel="stylesheet" href="styles.css"> <!-- Pastikan path ini benar -->
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            font-family: 'Poppins', Arial, sans-serif;
+            background: linear-gradient(to right, #141e30, #243b55);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #fff;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .container {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
+            max-width: 700px;
+            position: relative;
+            z-index: 2;
+        }
+
+        h1 {
+            font-size: 2.0em;
+            margin-bottom: 20px;
+            color: #ff6b6b;
+        }
+
+        .image-container {
+            margin-bottom: 20px;
+        }
+
+        .image-container img {
+            width: 70%;
+            max-width: 250px;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .lyrics p {
+            font-size: 1.0em;
+            margin: 12px 0;
+            opacity: 0;
+            transform: scale(0.95);
+            transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 1.2em;
+            color: #fff;
+            background: #ff6b6b;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.2s ease;
+        }
+
+        button:hover {
+            background: #ff8585;
+            transform: scale(1.1);
+        }
+
+        .floating-elements {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .floating-elements .element {
+            position: absolute;
+            font-size: 2.5em;
+            animation: floatAnimation 10s linear infinite;
+        }
+
+        .element.star {
+            animation-duration: 12s;
+        }
+
+        .element.bird {
+            animation-duration: 14s;
+        }
+
+        .element.flower {
+            animation-duration: 16s;
+        }
+
+        .element.love {
+            animation-duration: 18s;
+        }
+
+        .element.dot {
+            font-size: 1.7em;
+            animation: blinkAnimation 1s infinite;
+        }
+
+        @keyframes floatAnimation {
+            0% {
+                transform: translateY(100vh) translateX(0);
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(10vw);
+                opacity: 0;
+            }
+        }
+
+        @keyframes blinkAnimation {
+            0%, 100% {
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+        }
+
+        .instructions, .thank-you {
+            font-size: 1.2em;
+            margin: 20px 0;
+        }
+
+        .instructions {
+            color: #ffeb3b;
+        }
+
+        .thank-you {
+            color: #4caf50;
+            display: none; /* Hidden initially */
+        }
+
+        .show {
+            display: block; /* Show when needed */
+        }
+    </style>
 </head>
+
 <body>
     <div class="floating-elements">
-        <!-- Floating elements -->
+        <div class="element star" style="left: 10%;">✨</div>
+        <div class="element bird" style="left: 20%;">🕊️</div>
+        <div class="element flower" style="left: 30%;">🌸</div>
+        <div class="element flower" style="left: 40%;">🌸</div>
+        <div class="element love" style="left: 40%;">💖</div>
+        <div class="element love" style="left: 50%;">💖</div>
+        <div class="element star" style="left: 50%;">✨</div>
+        <div class="element dot" style="left: 70%; top: 20%;">•</div>
+        <div class="element dot" style="left: 80%; top: 40%;">•</div>
+        <div class="element dot" style="left: 60%; top: 60%;">•</div>
+        <div class="element dot" style="left: 30%; top: 80%;">•</div>
     </div>
 
     <div class="container">
         <h1>Penjaga Hati</h1>
         <div class="image-container">
-            <img src="ibu-tida.jpeg" alt="Ibu Tida"> <!-- Pastikan path ini benar -->
+            <img src="ibu-tida.jpeg" alt="Ibu Tida">
         </div>
         <div class="instructions">
             Silahkan klik tombol di bawah ini dan selamat menyaksikan!
         </div>
         <button id="playButton">Putar Musik</button>
         <div class="lyrics">
-            <!-- Lirik akan diisi oleh JavaScript -->
+            <p>Kan ku arungi tujuh laut samudra</p>
+            <p>Kan ku daki pegunungan Himalaya</p>
+            <p>Apapun kan ku lakukan tuk dirimu sayang</p>
+            <p>Oh penjaga hati</p>
+            <p>Kau dan aku sempurna</p>
+            <p>Semoga ada cara tuk terus bersama</p>
+            <p>Selalu ku tunggu</p>
+            <p>Tak mau berlalu</p>
+            <p>Kau dan aku</p>
         </div>
         <div class="thank-you">
             Terima kasih telah menyaksikan!
         </div>
     </div>
 
-    <audio id="audio" src="penjaga hati.mp3"></audio> <!-- Pastikan path ini benar -->
+    <audio id="audio" src="penjaga-hati.mp3"></audio>
 
-    <script src="script.js"></script> <!-- Pastikan path ini benar -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const lines = document.querySelectorAll('.lyrics p');
+            const instructions = document.querySelector('.instructions');
+            const thankYou = document.querySelector('.thank-you');
+            const playButton = document.getElementById('playButton');
+            const audio = document.getElementById('audio');
+            let currentLine = 0;
+
+            function showNextLine() {
+                if (currentLine < lines.length) {
+                    lines[currentLine].style.opacity = 1;
+                    lines[currentLine].style.transform = 'scale(1)';
+                    currentLine++;
+                    setTimeout(showNextLine, 3000); // Adjust timing if needed
+                } else {
+                    setTimeout(() => {
+                        thankYou.classList.add('show');
+                    }, 3000); // Show thank you message after lirik selesai
+                }
+            }
+
+            playButton.addEventListener('click', () => {
+                instructions.style.display = 'none'; // Hide instructions when button is clicked
+                audio.play();
+                showNextLine();
+            });
+        });
+    </script>
 </body>
+
 </html>
