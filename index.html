@@ -4,28 +4,193 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Penjaga Hati - Lirik Lagu</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Penjaga Hati - Bucin</title>
+    <style>
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            font-family: 'Poppins', Arial, sans-serif;
+            background: linear-gradient(to right, #fbc2eb, #a6c0fe);
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            position: relative;
+            width: 80%;
+            height: 80%;
+            overflow: hidden;
+        }
+
+        .slides {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            transition: transform 1s ease-in-out;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            text-align: center;
+            padding: 20px;
+            box-sizing: border-box;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            transform: scale(0.95);
+            transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+        }
+
+        .slide.active {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .slide.prev {
+            opacity: 0;
+            transform: scale(0.95);
+        }
+
+        .slide.next {
+            opacity: 0;
+            transform: scale(0.95);
+        }
+
+        .slide h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .slide p {
+            font-size: 1.4em;
+            margin: 10px 0;
+            max-width: 600px;
+            color: #444;
+        }
+
+        .slide .emoji {
+            font-size: 3.5em;
+            margin-top: 20px;
+        }
+
+        .navigation {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 20px;
+        }
+
+        .navigation button {
+            background-color: #fff;
+            border: none;
+            padding: 12px 24px;
+            font-size: 18px;
+            color: #a6c0fe;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .navigation button:hover {
+            background-color: #4e54c8;
+            color: #fff;
+            transform: scale(1.1);
+        }
+    </style>
 </head>
 
 <body>
+
     <div class="container">
-        <h1>Penjaga Hati</h1>
-        <div class="image-container">
-            <img src="ibu-tida.jpeg" alt="Ibu Tida">
+        <div class="slides">
+            <!-- Slide 1: Lagu Penjaga Hati -->
+            <div class="slide active">
+                <h1>Penjaga Hati - Bucin</h1>
+                <p>Selamat datang! Nikmati lagu "Penjaga Hati" dengan transisi yang menawan! 🎶</p>
+                <div class="emoji">🎵</div>
+                <p>Geser atau klik tombol di bawah untuk melanjutkan</p>
+            </div>
+
+            <!-- Slide 2: Lagu dan Lirik -->
+            <div class="slide">
+                <h1>Lagu: Penjaga Hati</h1>
+                <p>Di bawah ini adalah lirik lagu dan sedikit informasi tentangnya.</p>
+                <div class="emoji">🎤</div>
+                <p>Lirik:</p>
+                <p>"Kau adalah penjaga hati, yang membuatku merasa berarti..."</p>
+            </div>
+
+            <!-- Slide 3: Informasi -->
+            <div class="slide">
+                <h1>Informasi Lagu</h1>
+                <p>Lagu ini merupakan bagian dari album terbaru Bucin. Semoga kamu menyukainya! 💖</p>
+                <div class="emoji">💿</div>
+            </div>
+
+            <!-- Slide 4: Penutup -->
+            <div class="slide">
+                <h1>Terima Kasih!</h1>
+                <p>Terima kasih telah mendengarkan lagu ini. Semoga hari-harimu penuh dengan musik dan kebahagiaan! 🌟</p>
+                <div class="emoji">✨</div>
+            </div>
         </div>
-        <div class="lyrics">
-            <p id="line1">Saat malam tiba</p>
-            <p id="line2">Dan bintang-bintang bersinar</p>
-            <p id="line3">Hatiku selalu merasa</p>
-            <p id="line4">Ada yang menjaga</p>
-            <p id="line5">Di dalam gelapnya</p>
-            <p id="line6">Terpancar terang sinarnya</p>
+
+        <div class="navigation">
+            <button id="prevSlide">◀️ Sebelumnya</button>
+            <button id="nextSlide">Berikutnya ▶️</button>
         </div>
-        <button id="playButton">Putar Musik</button>
-        <audio id="audio" src="penjaga-hati.mp3"></audio>
     </div>
-    <script src="script.js"></script>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+
+        function updateSlide(position) {
+            slides.forEach((slide, index) => {
+                slide.classList.remove('active', 'prev', 'next');
+                if (index === position) {
+                    slide.classList.add('active');
+                } else if (index === (position - 1 + totalSlides) % totalSlides) {
+                    slide.classList.add('prev');
+                } else if (index === (position + 1) % totalSlides) {
+                    slide.classList.add('next');
+                }
+            });
+        }
+
+        document.getElementById('nextSlide').addEventListener('click', () => {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            updateSlide(currentSlide);
+        });
+
+        document.getElementById('prevSlide').addEventListener('click', () => {
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            updateSlide(currentSlide);
+        });
+
+        // Initialize the first slide
+        updateSlide(currentSlide);
+    </script>
+
 </body>
 
 </html>
