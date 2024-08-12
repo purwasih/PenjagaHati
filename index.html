@@ -134,6 +134,24 @@
                 opacity: 1;
             }
         }
+
+        .instructions, .thank-you {
+            font-size: 1.2em;
+            margin: 20px 0;
+        }
+
+        .instructions {
+            color: #ffeb3b;
+        }
+
+        .thank-you {
+            color: #4caf50;
+            display: none; /* Hidden initially */
+        }
+
+        .show {
+            display: block; /* Show when needed */
+        }
     </style>
 </head>
 
@@ -155,6 +173,10 @@
         <div class="image-container">
             <img src="ibu-tida.jpeg" alt="Ibu Tida">
         </div>
+        <div class="instructions">
+            Silahkan klik tombol di bawah ini dan selamat menyaksikan!
+        </div>
+        <button id="playButton">Putar Musik</button>
         <div class="lyrics">
             <p>Kan ku arungi tujuh laut samudra</p>
             <p>Kan ku daki pegunungan Himalaya</p>
@@ -166,11 +188,17 @@
             <p>Tak mau berlalu</p>
             <p>Kau dan aku</p>
         </div>
+        <div class="thank-you">
+            Terima kasih telah menyaksikan!
+        </div>
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const lines = document.querySelectorAll('.lyrics p');
+            const instructions = document.querySelector('.instructions');
+            const thankYou = document.querySelector('.thank-you');
+            const playButton = document.getElementById('playButton');
             let currentLine = 0;
 
             function showNextLine() {
@@ -179,10 +207,17 @@
                     lines[currentLine].style.transform = 'scale(1)';
                     currentLine++;
                     setTimeout(showNextLine, 3000); // Adjust timing if needed
+                } else {
+                    setTimeout(() => {
+                        thankYou.classList.add('show');
+                    }, 3000); // Show thank you message after lirik selesai
                 }
             }
 
-            showNextLine();
+            playButton.addEventListener('click', () => {
+                instructions.style.display = 'none'; // Hide instructions when button is clicked
+                showNextLine();
+            });
         });
     </script>
 </body>
