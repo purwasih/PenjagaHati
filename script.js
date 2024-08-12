@@ -1,33 +1,51 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const lines = document.querySelectorAll('.lyrics p');
-    const audio = document.getElementById('audio');
+    const lyricsContainer = document.querySelector('.lyrics');
+    const instructions = document.querySelector('.instructions');
+    const thankYou = document.querySelector('.thank-you');
     const playButton = document.getElementById('playButton');
-    let currentLine = 0;
+    const audio = document.getElementById('audio');
+    let lyrics = [];
+    let currentIndex = 0;
 
-    function showNextLine() {
-        if (currentLine < lines.length) {
-            lines[currentLine].style.opacity = 1;
-            lines[currentLine].style.transform = 'scale(1)';
-            currentLine++;
-        }
-    }
-
-    function hideAllLines() {
-        lines.forEach(line => {
-            line.style.opacity = 0;
-            line.style.transform = 'scale(0.95)';
+    // Memuat file lyrics-timing.json
+    fetch('lyrics-timing.json')
+        .then(response => response.json())
+        .then(data => {
+            lyrics = data;
+            lyrics.forEach(line => {
+                const p = document.createElement('p');
+                p.textContent = line.text;
+                p.style.opacity = 0;
+                p.style.transform = 'scale(0.95)';
+                lyricsContainer.appendChild(p);
+            });
         });
+
+    function updateLyrics() {
+        if (lyrics.length > 0) {
+            const currentTime = audio.currentTime;
+            lyrics.forEach((line, index) => {
+                const p = lyricsContainer.children[index];
+                if (line.time <= currentTime && line.time + 5 > currentTime) {
+                    p.style.opacity = 1;
+                    p.style.transform = 'scale(1)';
+                } else {
+                    p.style.opacity = 0;
+                    p.style.transform = 'scale(0.95)';
+                }
+            });
+
+            if (currentIndex >= lyrics.length && !thankYou.classList.contains('show')) {
+                thankYou.classList.add('show');
+            }
+        }
     }
 
-    playButton.addEventListener('click', () => {
-        if (audio.paused) {
-            audio.play();
-            hideAllLines();
-            currentLine = 0;
-            showNextLine();
-            setInterval(showNextLine, 3000); // Adjust timing if needed
-        } else {
-            audio.pause();
-        }
-    });
+    function playMusic() {
+        audio.play();
+        instructions.style.display = 'none';
+        audio.addEventListener('timeupdate', updateLyrics);
+    }
+
+    playButton.addEventListener('click', playMusic);
 });
