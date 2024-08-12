@@ -5,19 +5,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Penjaga Hati - Lirik Lagu</title>
-    <style>
-        /* CSS yang sama seperti sebelumnya */
-    </style>
+    <!-- Menautkan file CSS -->
+    <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
     <div class="floating-elements">
-        <!-- Floating elements -->
+        <div class="element star" style="left: 10%;">✨</div>
+        <div class="element bird" style="left: 20%;">🕊️</div>
+        <div class="element flower" style="left: 30%;">🌸</div>
+        <div class="element flower" style="left: 40%;">🌸</div>
+        <div class="element love" style="left: 40%;">💖</div>
+        <div class="element love" style="left: 50%;">💖</div>
+        <div class="element star" style="left: 50%;">✨</div>
+        <div class="element dot" style="left: 70%; top: 20%;">•</div>
+        <div class="element dot" style="left: 80%; top: 40%;">•</div>
+        <div class="element dot" style="left: 60%; top: 60%;">•</div>
+        <div class="element dot" style="left: 30%; top: 80%;">•</div>
     </div>
 
     <div class="container">
         <h1>Penjaga Hati</h1>
         <div class="image-container">
+            <!-- Menautkan file gambar -->
             <img src="ibu-tida.jpeg" alt="Ibu Tida">
         </div>
         <div class="instructions">
@@ -32,60 +42,10 @@
         </div>
     </div>
 
+    <!-- Menautkan file audio -->
     <audio id="audio" src="penjaga-hati.mp3"></audio>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const lyricsContainer = document.querySelector('.lyrics');
-            const instructions = document.querySelector('.instructions');
-            const thankYou = document.querySelector('.thank-you');
-            const playButton = document.getElementById('playButton');
-            const audio = document.getElementById('audio');
-            let lyrics = [];
-            let currentIndex = 0;
-
-            fetch('lyrics-timing.json')
-                .then(response => response.json())
-                .then(data => {
-                    lyrics = data;
-                    lyrics.forEach(line => {
-                        const p = document.createElement('p');
-                        p.textContent = line.text;
-                        p.style.opacity = 0;
-                        p.style.transform = 'scale(0.95)';
-                        lyricsContainer.appendChild(p);
-                    });
-                });
-
-            function updateLyrics() {
-                if (lyrics.length > 0) {
-                    const currentTime = audio.currentTime;
-                    lyrics.forEach((line, index) => {
-                        const p = lyricsContainer.children[index];
-                        if (line.time <= currentTime && line.time + 5 > currentTime) { // Adjust timing as needed
-                            p.style.opacity = 1;
-                            p.style.transform = 'scale(1)';
-                        } else {
-                            p.style.opacity = 0;
-                            p.style.transform = 'scale(0.95)';
-                        }
-                    });
-
-                    if (currentIndex >= lyrics.length && !thankYou.classList.contains('show')) {
-                        thankYou.classList.add('show');
-                    }
-                }
-            }
-
-            function playMusic() {
-                audio.play();
-                instructions.style.display = 'none'; // Hide instructions when button is clicked
-                audio.addEventListener('timeupdate', updateLyrics);
-            }
-
-            playButton.addEventListener('click', playMusic);
-        });
-    </script>
+    <!-- Menautkan file JavaScript -->
+    <script src="script.js"></script>
 </body>
 
 </html>
